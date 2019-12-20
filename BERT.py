@@ -31,9 +31,9 @@ df.head()
 
 print(df.comment_text[0])
 
-df_train = df[:10000].reset_index(drop=True)
-df_val = df[10000:11000].reset_index(drop=True)
-df_test = df[11000:13000].reset_index(drop=True)
+df_train = df[:1000].reset_index(drop=True)
+df_val = df[1000:1100].reset_index(drop=True)
+df_test = df[1100:1300].reset_index(drop=True)
 
 pretrained_weights='distilbert-base-uncased'
 # Load pretrained model/tokenizer
@@ -41,8 +41,6 @@ pretrained_weights='distilbert-base-uncased'
 # Load pretrained model/tokenizer
 tokenizer = transformers.DistilBertTokenizer.from_pretrained(pretrained_weights)
 model = transformers.DistilBertModel.from_pretrained(pretrained_weights)
-
-
 
 max_seq = 100
 
