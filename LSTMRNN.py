@@ -1,6 +1,7 @@
 #https://machinelearningmastery.com/sequence-classification-lstm-recurrent-neural-networks-python-keras/
 
 import numpy
+
 from keras.datasets import imdb
 from keras.models import Sequential
 from keras.layers import Dense
@@ -9,10 +10,21 @@ from keras.layers.embeddings import Embedding
 from keras.preprocessing import sequence
 # fix random seed for reproducibility
 numpy.random.seed(7)
-
-# load the dataset but only keep the top n words, zero the rest
+import numpy as np
+# save np.load
+np_load_old = np.load
 top_words = 5000
+
+
+# modify the default parameters of np.load
+np.load = lambda *a,**k: np_load_old(*a, allow_pickle=True, **k)
+
+# call load_data with allow_pickle implicitly set to true
 (X_train, y_train), (X_test, y_test) = imdb.load_data(num_words=top_words)
+
+# restore np.load for future normal usage
+np.load = np_load_old
+# load the dataset but only keep the top n words, zero the rest
 
 
 # truncate and pad input sequences
